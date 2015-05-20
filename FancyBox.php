@@ -70,8 +70,10 @@ class FancyBox extends Widget {
 
         if(!empty($this->group)){
             $config = Json::encode($this->group).','.$config;
+            $view->registerJs("jQuery('{$this->target}').on('click',function(e){ e.preventDefault(); $.fancybox({$config}); })");
+        }else {
+            $view->registerJs("jQuery('{$this->target}').fancybox({$config});");
         }
-        $view->registerJs("jQuery('{$this->target}').fancybox({$config});");
     }
 
     /**
